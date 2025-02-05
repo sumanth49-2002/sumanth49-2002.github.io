@@ -146,65 +146,122 @@
             gap: 2rem;
         }
         
-        /* Timetable Styles */
-        .timetable-container {
-            margin-top: 2rem;
-            overflow-x: auto;
-        }
-        
-        .timetable {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .timetable th {
-            background-color: #e65c2c;
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .timetable td {
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .timetable tr:hover {
-            background-color: #f8fafc;
-        }
-        
-        .day-header {
-            background-color: #f97316;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            padding: 0.5rem;
-            margin-top: 2rem;
-        }
-        
-        .class-select-container {
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .class-select {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 0.5rem;
-            width: 200px;
-            margin: 0 auto;
-        }
+  /* Timetable Styles */
+.timetable-container {
+    margin: 2rem auto;
+    max-width: 1000px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
 
-        .program-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.day-header {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.timetable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    margin: 0;
+}
+
+.timetable thead {
+    background: #f8fafc;
+}
+
+.timetable th {
+    background: #e2e8f0;
+    color: #1e3a8a;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #cbd5e1;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+.timetable td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    color: #475569;
+    transition: all 0.2s ease;
+}
+
+.timetable tr:hover td {
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+}
+
+/* Column-specific styles */
+.timetable td:nth-child(1) {
+    font-weight: 600;
+    color: #2563eb;  /* Session time in blue */
+}
+
+.timetable td:nth-child(2) {
+    font-weight: 500;
+    color: #1e40af;  /* Course name in darker blue */
+}
+
+.timetable td:nth-child(3) {
+    color: #475569;  /* Faculty in gray */
+}
+
+.timetable td:nth-child(4) {
+    color: #64748b;  /* Lecture hall in lighter gray */
+    text-align: center;
+}
+
+/* Class selection styles */
+.class-select-container {
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.class-select-container h3 {
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.class-select {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    width: auto;
+    min-width: 200px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.class-select:hover {
+    border-color: #2563eb;
+}
+
+.class-select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
         }
 
         /* Footer */
