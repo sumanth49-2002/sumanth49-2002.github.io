@@ -570,27 +570,27 @@
         const timetableContent = document.getElementById('timetableContent');
 
         classSelect.addEventListener('change', function() {
-            const selectedClass = this.value;
-            if (selectedClass === 'CF6') {
-                let allTablesHTML = '';
-                for (const [day, dayData] of Object.entries(timetableData.CF6)) {
-                    allTablesHTML += createDayTable(dayData, day);
-                }
-                timetableContent.innerHTML = allTablesHTML;
-                timetableContainer.style.display = 'block';
-            } else {
-                timetableContainer.style.display = 'none';
-            if (selectedClass === 'CM2') {
-                let allTablesHTML = '';
-                for (const [day, dayData] of Object.entries(timetableData.CM2)) {
-                    allTablesHTML += createDayTable(dayData, day);
-                }
-                timetableContent.innerHTML = allTablesHTML;
-                timetableContainer.style.display = 'block';
-            } else {
-                timetableContainer.style.display = 'none';
-            }
-        });
+  const selectedClass = this.value;
+  if (selectedClass === 'CF6') {
+    let allTablesHTML = '';
+    for (const [day, dayData] of Object.entries(timetableData.CF6)) {
+      allTablesHTML += createDayTable(dayData, day);
+    }
+    timetableContent.innerHTML = allTablesHTML;
+    timetableContainer.style.display = 'block';
+  } else if (selectedClass === 'CM2') {
+    let allTablesHTML = '';
+    for (const [day, dayData] of Object.entries(timetableData.CM2)) {
+      allTablesHTML += createDayTable(dayData, day);
+    }
+    timetableContent.innerHTML = allTablesHTML;
+    timetableContainer.style.display = 'block';
+  } else {
+    timetableContainer.style.display = 'none';
+  }
+});
+            
+
     </script>
 </body>
 </html>
