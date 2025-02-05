@@ -238,6 +238,72 @@
             <button type="submit" class="button" style="background-color: #1e3a8a; color: white; width: 100%;">Submit Application</button>
         </form>
     </div>
+<div id="class-section" class="class-section">
+  <h2>Select Class</h2>
+  <select id="class-select">
+    <option value="">Select a class...</option>
+    <option value="CF6">CF6</option>
+    <!-- Add other class options as needed -->
+  </select>
+
+  <div id="timetable-section" class="timetable">
+    <h3>CF6 Timetable</h3>
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Day</th>
+        <th>Sem</th>
+        <th>Section</th>
+        <th>Session</th>
+        <th>Course</th>
+        <th>Faculty</th>
+        <th>Lec. Hall</th>
+      </tr>
+      <tr>
+        <td>3-Feb-25</td>
+        <td>Monday</td>
+        <td>IV</td>
+        <td>CF6</td>
+        <td>8:45 - 10:15</td>
+        <td>PFF</td>
+        <td>SR</td>
+        <td>303</td>
+      </tr>
+      <tr>
+        <td>3-Feb-25</td>
+        <td>Monday</td>
+        <td>IV</td>
+        <td>CF6</td>
+        <td>10:45 - 12:15</td>
+        <td>IT</td>
+        <td>SS</td>
+        <td>303</td>
+      </tr>
+      <tr>
+        <td>3-Feb-25</td>
+        <td>Monday</td>
+        <td>IV</td>
+        <td>CF6</td>
+        <td>1:15 - 2:45</td>
+        <td>FML</td>
+        <td>GM</td>
+        <td>303</td>
+      </tr>
+      <tr>
+        <td>3-Feb-25</td>
+        <td>Monday</td>
+        <td>IV</td>
+        <td>CF6</td>
+        <td>2:55 - 4:25</td>
+        <td>IB</td>
+        <td>VYJ</td>
+        <td>303</td>
+      </tr>
+      <!-- Add more rows for the remaining days and classes -->
+    </table>
+  </div>
+</div>
+
 
     <!-- Leadership Section -->
     <div class="section">
@@ -326,6 +392,17 @@
                 form.style.display = 'none';
             }
         }
+// Show timetable when class is selected
+const classSelect = document.getElementById('class-select');
+const timetableSection = document.getElementById('timetable-section');
+
+classSelect.addEventListener('change', function() {
+  if (this.value === 'CF6') {
+    timetableSection.style.display = 'block';
+  } else {
+    timetableSection.style.display = 'none';
+  }
+});
     </script>
 </body>
 </html>
