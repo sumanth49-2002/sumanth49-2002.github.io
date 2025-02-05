@@ -145,6 +145,60 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
+        
+        /* Timetable Styles */
+        .timetable-container {
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+        
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timetable th {
+            background-color: #e65c2c;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .timetable td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .timetable tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .day-header {
+            background-color: #f97316;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .class-select-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .class-select {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            width: 200px;
+            margin: 0 auto;
+        }
 
         .program-card {
             background: white;
@@ -183,11 +237,13 @@
         .button:hover {
             background-color: #f3f4f6;
         }
+
+
     </style>
 </head>
 <body>
     <!-- Announcement Banner -->
-  <div class="announcement">Join RBS!!!</div>
+    <div class="announcement">Join RBS!!!</div>
 
     <!-- Navigation -->
     <nav class="nav">
@@ -238,72 +294,6 @@
             <button type="submit" class="button" style="background-color: #1e3a8a; color: white; width: 100%;">Submit Application</button>
         </form>
     </div>
-<div id="class-section" class="class-section">
-  <h2>Select Class</h2>
-  <select id="class-select">
-    <option value="">Select a class...</option>
-    <option value="CF6">CF6</option>
-    <!-- Add other class options as needed -->
-  </select>
-
-  <div id="timetable-section" class="timetable">
-    <h3>CF6 Timetable</h3>
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Day</th>
-        <th>Sem</th>
-        <th>Section</th>
-        <th>Session</th>
-        <th>Course</th>
-        <th>Faculty</th>
-        <th>Lec. Hall</th>
-      </tr>
-      <tr>
-        <td>3-Feb-25</td>
-        <td>Monday</td>
-        <td>IV</td>
-        <td>CF6</td>
-        <td>8:45 - 10:15</td>
-        <td>PFF</td>
-        <td>SR</td>
-        <td>303</td>
-      </tr>
-      <tr>
-        <td>3-Feb-25</td>
-        <td>Monday</td>
-        <td>IV</td>
-        <td>CF6</td>
-        <td>10:45 - 12:15</td>
-        <td>IT</td>
-        <td>SS</td>
-        <td>303</td>
-      </tr>
-      <tr>
-        <td>3-Feb-25</td>
-        <td>Monday</td>
-        <td>IV</td>
-        <td>CF6</td>
-        <td>1:15 - 2:45</td>
-        <td>FML</td>
-        <td>GM</td>
-        <td>303</td>
-      </tr>
-      <tr>
-        <td>3-Feb-25</td>
-        <td>Monday</td>
-        <td>IV</td>
-        <td>CF6</td>
-        <td>2:55 - 4:25</td>
-        <td>IB</td>
-        <td>VYJ</td>
-        <td>303</td>
-      </tr>
-      <!-- Add more rows for the remaining days and classes -->
-    </table>
-  </div>
-</div>
-
 
     <!-- Leadership Section -->
     <div class="section">
@@ -358,6 +348,23 @@
                 <p>Learn advanced data analysis and business intelligence.</p>
             </div>
         </div>
+        
+        <div class="class-select-container">
+            <h3>Class Timetable</h3>
+            <select class="class-select" id="classSelect">
+                <option value="">Select a class</option>
+                <option value="CF1">CF1</option>
+                <option value="CF2">CF2</option>
+                <option value="CF3">CF3</option>
+                <option value="CF4">CF4</option>
+                <option value="CF5">CF5</option>
+                <option value="CF6">CF6</option>
+            </select>
+        </div>
+        
+        <div id="timetableContainer" class="timetable-container" style="display: none;">
+            <div id="timetableContent"></div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -392,17 +399,94 @@
                 form.style.display = 'none';
             }
         }
-// Show timetable when class is selected
-const classSelect = document.getElementById('class-select');
-const timetableSection = document.getElementById('timetable-section');
 
-classSelect.addEventListener('change', function() {
-  if (this.value === 'CF6') {
-    timetableSection.style.display = 'block';
-  } else {
-    timetableSection.style.display = 'none';
-  }
-});
+        // Timetable data
+        const timetableData = {
+            "CF6": {
+                "Monday": [
+                    { date: "3-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "PFF", faculty: "SR", lecHall: "303" },
+                    { date: "3-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IT", faculty: "SS", lecHall: "303" },
+                    { date: "3-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "FML", faculty: "GM", lecHall: "303" },
+                    { date: "3-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "IB", faculty: "VYJ", lecHall: "303" }
+                ],
+                "Tuesday": [
+                    { date: "4-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IT", faculty: "SS", lecHall: "303" },
+                    { date: "4-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "FT", faculty: "SN", lecHall: "303" },
+                    { date: "4-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "PFF", faculty: "SR", lecHall: "303" },
+                    { date: "4-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                ],
+                "Wednesday": [
+                    { date: "5-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IT", faculty: "SS", lecHall: "303" },
+                    { date: "5-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IEPR", faculty: "SBC", lecHall: "303" },
+                    { date: "5-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "Club Act.", faculty: "--", lecHall: "--" },
+                    { date: "5-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "Club Act.", faculty: "--", lecHall: "--" }
+                ],
+                "Thursday": [
+                    { date: "6-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IEPR", faculty: "SBC", lecHall: "303" },
+                    { date: "6-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IB", faculty: "VYJ", lecHall: "303" },
+                    { date: "6-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "MTPCL", faculty: "--", lecHall: "--" },
+                    { date: "6-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                ],
+                "Friday": [
+                    { date: "7-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IT", faculty: "SS", lecHall: "303" },
+                    { date: "7-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "FT", faculty: "SN", lecHall: "303" },
+                    { date: "7-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "IEPR", faculty: "SBC", lecHall: "303" },
+                    { date: "7-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                ]
+            }
+        };
+
+        function createDayTable(dayData, day) {
+            let tableHTML = `
+                <div class="day-header">${day}</div>
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>Session</th>
+                            <th>Course</th>
+                            <th>Faculty</th>
+                            <th>Lec. Hall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            dayData.forEach(session => {
+                tableHTML += `
+                    <tr>
+                        <td>${session.session}</td>
+                        <td>${session.course}</td>
+                        <td>${session.faculty}</td>
+                        <td>${session.lecHall}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            return tableHTML;
+        }
+
+        // Class selection handling
+        const classSelect = document.getElementById('classSelect');
+        const timetableContainer = document.getElementById('timetableContainer');
+        const timetableContent = document.getElementById('timetableContent');
+
+        classSelect.addEventListener('change', function() {
+            const selectedClass = this.value;
+            if (selectedClass === 'CF6') {
+                let allTablesHTML = '';
+                for (const [day, dayData] of Object.entries(timetableData.CF6)) {
+                    allTablesHTML += createDayTable(dayData, day);
+                }
+                timetableContent.innerHTML = allTablesHTML;
+                timetableContainer.style.display = 'block';
+            } else {
+                timetableContainer.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
