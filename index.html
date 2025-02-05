@@ -405,6 +405,7 @@
                 <option value="CF4">CF4</option>
                 <option value="CF5">CF5</option>
                 <option value="CF6">CF6</option>
+                <option value="CM2">CM2</option>
             </select>
         </div>
         
@@ -491,7 +492,43 @@
                     { date: "8-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "FML", faculty: "GM", lecHall: "303" },
                     { date: "8-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IB", faculty: "VYJ", lecHall: "303" },
               ]
-            }
+            },
+         "CM2": {
+               "Monday": [
+                    { date: "3-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "STM", faculty: "KKS", lecHall: "610" },
+                    { date: "3-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "CWC", faculty: "SUS", lecHall: "610" },
+                    { date: "3-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "PM", faculty: "Anup", lecHall: "610" },
+                    { date: "3-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "PM", faculty: "Anup", lecHall: "610" }
+                  ], 
+                "Tuesday": [
+                   { date: "4-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "IEPR", faculty: "DJS", lecHall: "610" },
+                   { date: "4-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "LM", faculty: "SG", lecHall: "610" },
+                   { date: "4-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "B2B", faculty: "UC", lecHall: "610" },
+                   { date: "4-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                   ],
+               "Wednesday": [
+                  { date: "5-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "LM", faculty: "SG", lecHall: "610" },
+                  { date: "5-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "CWC", faculty: "SUS", lecHall: "610" },
+                  { date: "5-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "IEPR", faculty: "DJS", lecHall: "610" },
+                  { date: "5-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "PM", faculty: "ANUP", lecHall: "610" }
+                ],
+               "Thursday": [
+                  { date: "6-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "B2B", faculty: "UC", lecHall: "610" },
+                  { date: "6-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "CWC", faculty: "SUS", lecHall: "610" },
+                  { date: "6-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "Club Act.", faculty: "--", lecHall: "--" },
+                  { date: "6-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "Club Act.", faculty: "--", lecHall: "--" }
+                ],
+               "Friday": [
+                  { date: "7-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "STM", faculty: "KKS", lecHall: "610" },
+                  { date: "7-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "LM", faculty: "SG", lecHall: "610" },
+                  { date: "7-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "B2B", faculty: "UC", lecHall: "610" },
+                  { date: "7-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                 ],
+               "Saturday": [
+                  { date: "8-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "LM", faculty: "SG", lecHall: "610" },
+                  { date: "8-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "STM", faculty: "KKS", lecHall: "610" }
+                 ]
+            } 
         };
 
         function createDayTable(dayData, day) {
@@ -537,6 +574,15 @@
             if (selectedClass === 'CF6') {
                 let allTablesHTML = '';
                 for (const [day, dayData] of Object.entries(timetableData.CF6)) {
+                    allTablesHTML += createDayTable(dayData, day);
+                }
+                timetableContent.innerHTML = allTablesHTML;
+                timetableContainer.style.display = 'block';
+            } else {
+                timetableContainer.style.display = 'none';
+            if (selectedClass === 'CM2') {
+                let allTablesHTML = '';
+                for (const [day, dayData] of Object.entries(timetableData.CM2)) {
                     allTablesHTML += createDayTable(dayData, day);
                 }
                 timetableContent.innerHTML = allTablesHTML;
