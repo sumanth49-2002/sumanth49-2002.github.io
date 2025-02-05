@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Business School - Bangalore</title>
+    <style>
+        /* Core styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Banner */
+        .announcement {
+            background-color: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { background-color: #dc2626; }
+            50% { background-color: #ef4444; }
+            100% { background-color: #dc2626; }
+        }
+
+        /* Navigation */
+        .nav {
+            background-color: #1e3a8a;
+            padding: 1rem;
+            color: white;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+        }
+
+        .nav-links a:hover {
+            background-color: #1e40af;
+            border-radius: 4px;
+        }
+
+        /* Hero section */
+        .hero {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Application Form */
+        .application-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        /* Leadership Grid */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .leadership-card {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .leadership-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .button {
+            background-color: white;
+            color: #1e3a8a;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Banner -->
+    <div class="announcement">
+        F Jain Join RBS!!!
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">Russian Business School</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Programs</a>
+                <a href="#">Faculty</a>
+                <a href="#">Admissions</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Shape Your Future in Business</h1>
+        <p>Join Bangalore's premier Russian business education institution</p>
+        <button class="button" onclick="toggleApplicationForm()">Apply Now</button>
+    </div>
+
+    <!-- Application Form -->
+    <div id="applicationForm" class="application-form">
+        <h2>Application Form</h2>
+        <form>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" required>
+            </div>
+            <div class="form-group">
+                <label>Program of Interest</label>
+                <select>
+                    <option>MBA - Finance</option>
+                    <option>MBA - Marketing</option>
+                    <option>MBA - HR</option>
+                    <option>MBA - Data Analytics</option>
+                </select>
+            </div>
+            <button type="submit" class="button" style="background-color: #1e3a8a; color: white; width: 100%;">Submit Application</button>
+        </form>
+    </div>
+
+    <!-- Leadership Section -->
+    <div class="section">
+        <h2>Our Leadership</h2>
+        <div class="leadership-grid">
+            <div class="leadership-card">
+                <img src="chairman.jpg" alt="Chairman">
+                <h3>Pranav Chauhan</h3>
+                <p>Chairman</p>
+            </div>
+            <div class="leadership-card">
+                <img src="/api/placeholder/150/150" alt="Dean">
+                <h3>Sumanth M N</h3>
+                <p>Dean & HOD of Finance</p>
+            </div>
+            <div class="leadership-card">
+                <img src="/api/placeholder/150/150" alt="HOD Marketing">
+                <h3>Sandesh</h3>
+                <p>HOD of Marketing</p>
+            </div>
+            <div class="leadership-card">
+                <img src="/api/placeholder/150/150" alt="HOD HR">
+                <h3>Vishal</h3>
+                <p>HOD of HR</p>
+            </div>
+            <div class="leadership-card">
+                <img src="/api/placeholder/150/150" alt="HOD Data Analytics">
+                <h3>Darshan</h3>
+                <p>HOD of Data Analytics</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programs Section -->
+    <div class="section" style="background-color: #f3f4f6;">
+        <h2>Our Programs</h2>
+        <div class="programs-grid">
+            <div class="program-card">
+                <h3>MBA in Finance</h3>
+                <p>Master financial strategies and investment management.</p>
+            </div>
+            <div class="program-card">
+                <h3>MBA in Marketing</h3>
+                <p>Develop advanced marketing and brand management skills.</p>
+            </div>
+            <div class="program-card">
+                <h3>MBA in HR</h3>
+                <p>Master human resource management and organizational behavior.</p>
+            </div>
+            <div class="program-card">
+                <h3>MBA in Data Analytics</h3>
+                <p>Learn advanced data analysis and business intelligence.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>Russian Business School</h3>
+                <p>Shaping tomorrow's business leaders</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Location: Bangalore</p>
+                <p>Email: info@russianbs.edu</p>
+                <p>Phone: +91 XXXXXXXXXX</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <p><a href="#" style="color: white;">About Us</a></p>
+                <p><a href="#" style="color: white;">Programs</a></p>
+                <p><a href="#" style="color: white;">Admissions</a></p>
+                <p><a href="#" style="color: white;">News</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleApplicationForm() {
+            const form = document.getElementById('applicationForm');
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
