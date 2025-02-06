@@ -301,6 +301,7 @@
                 <a href="#">Faculty</a>
                 <a href="#">Admissions</a>
                 <a href="#">Contact</a>
+                <a href="#timetables">Timetables</a>
             </div>
         </div>
     </nav>
@@ -376,6 +377,25 @@
     <!-- Programs Section -->
     <div class="section" style="background-color: #f3f4f6;">
         <h2>Our Programs</h2>
+<div class="class-select-container">
+    <h3>Class Schedule</h3>
+    <div class="flex justify-center space-x-4">
+        <select class="class-select" id="viewSelect">
+            <option value="regular">Regular Timetable</option>
+            <option value="exam">Mid Term Examination</option>
+        </select>
+        
+        <select class="class-select" id="classSelect">
+            <option value="">Select a class</option>
+            <option value="CF6">CF6</option>
+            <option value="CM2">CM2</option>
+        </select>
+    </div>
+</div>
+
+<div id="timetableContainer" class="timetable-container" style="display: none;">
+    <div id="timetableContent"></div>
+</div>
         <div class="programs-grid">
             <div class="program-card">
                 <h3>MBA in Finance</h3>
@@ -589,6 +609,24 @@
     timetableContainer.style.display = 'none';
   }
 });
+// Examination timetable data
+const examTimetableData = {
+    "CF6": [
+        { day: "Friday", date: "28-02-2025", subject: "IEPR" },
+        { day: "Monday", date: "03-03-2025", subject: "IT" },
+        { day: "Tuesday", date: "04-03-2025", subject: "IB" },
+        { day: "Wednesday", date: "05-03-2025", subject: "FML [ Batch 1 (9:30 to 11:30), Batch 2(1:30 to 3:30)]" },
+        { day: "Thursday", date: "06-03-2025", subject: "FT" },
+        { day: "Friday", date: "07-03-2025", subject: "FML [ Batch 3 (9:30 to 11:30), Batch 4(1:30 to 3:30)]" }
+    ],
+    "CM2": [
+        { day: "Friday", date: "28-02-2025", subject: "IEPR" },
+        { day: "Monday", date: "03-03-2025", subject: "SM" },
+        { day: "Tuesday", date: "04-03-2025", subject: "B2B" },
+        { day: "Wednesday", date: "05-03-2025", subject: "LM" },
+        { day: "Thursday", date: "06-03-2025", subject: "PM" }
+    ]
+};
             
 
     </script>
