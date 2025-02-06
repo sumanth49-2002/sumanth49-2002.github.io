@@ -550,6 +550,72 @@
                  ]
             } 
         };
+// Create a function to handle the examination timetable display
+function createExamTable(examData, classSection) {
+    return `
+        <div class="exam-timetable">
+            <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${examData.map(exam => `
+                        <tr>
+                            <td>${exam.day}</td>
+                            <td>${exam.date}</td>
+                            <td>${exam.subject}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+// Replace the existing event listener with this enhanced version
+function updateTimetable() {
+    // Get the selected values from both dropdowns
+    const selectedClass = classSelect.value;
+    const selectedView = viewSelect.value;
+
+    // Hide the timetable if no class is selected
+    if (!selectedClass) {
+        timetableContainer.style.display = 'none';
+        return;
+    }
+
+    // Handle different view types
+    if (selectedView === 'exam') {
+        // Display examination timetable
+        const examData = examTimetableData[selectedClass];
+        if (examData) {
+            timetableContent.innerHTML = createExamTable(examData, selectedClass);
+            timetableContainer.style.display = 'block';
+        }
+    } else {
+        // Display regular timetable
+        let allTablesHTML = '';
+        const classData = timetableData[selectedClass];
+        if (classData) {
+            for (const [day, dayData] of Object.entries(classData)) {
+                allTablesHTML += createDayTable(dayData, day);
+            }
+            timetableContent.innerHTML = allTablesHTML;
+            timetableContainer.style.display = 'block';
+        }
+    }
+}
+
+// Set up the event listeners for both dropdowns
+const viewSelect = document.getElementById('viewSelect');
+classSelect.removeEventListener('change', classSelect.onchange); // Remove old listener
+classSelect.addEventListener('change', updateTimetable);
+viewSelect.addEventListener('change', updateTimetable);
 
         function createDayTable(dayData, day) {
             let tableHTML = `
