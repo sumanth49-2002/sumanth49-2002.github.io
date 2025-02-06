@@ -450,15 +450,15 @@
     </div>
 </footer>
     <script>
-        function toggleApplicationForm() {
-            const form = document.getElementById('applicationForm');
-            if (form.style.display === 'none' || form.style.display === '') {
-                form.style.display = 'block';
-            } else {
-                form.style.display = 'none';
-            }
+    // Application form toggle
+    function toggleApplicationForm() {
+        const form = document.getElementById('applicationForm');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
         }
-
+    }
         // Timetable data
         const timetableData = {
             "CF6": {
@@ -534,249 +534,105 @@
                  ]
             } 
         };
-// Create a function to handle the examination timetable display
-function createExamTable(examData, classSection) {
-    return `
-        <div class="exam-timetable">
-            <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
+ // Exam timetable data
+    const examTimetableData = {
+        "CF6": [
+            { day: "Friday", date: "28-02-2025", subject: "IEPR" },
+            { day: "Monday", date: "03-03-2025", subject: "IT" },
+            { day: "Tuesday", date: "04-03-2025", subject: "IB" },
+            { day: "Wednesday", date: "05-03-2025", subject: "FML [ Batch 1 (9:30 to 11:30), Batch 2(1:30 to 3:30)]" },
+            { day: "Thursday", date: "06-03-2025", subject: "FT" },
+            { day: "Friday", date: "07-03-2025", subject: "FML [ Batch 3 (9:30 to 11:30), Batch 4(1:30 to 3:30)]" }
+        ],
+        "CM2": [
+            { day: "Friday", date: "28-02-2025", subject: "IEPR" },
+            { day: "Monday", date: "03-03-2025", subject: "SM" },
+            { day: "Tuesday", date: "04-03-2025", subject: "B2B" },
+            { day: "Wednesday", date: "05-03-2025", subject: "LM" },
+            { day: "Thursday", date: "06-03-2025", subject: "PM" }
+        ]
+    };
+
+    function createDayTable(dayData, day) {
+        return `
+            <div class="day-header">${day}</div>
             <table class="timetable">
                 <thead>
                     <tr>
-                        <th>Day</th>
-                        <th>Date</th>
-                        <th>Subject</th>
+                        <th>Session</th>
+                        <th>Course</th>
+                        <th>Faculty</th>
+                        <th>Lec. Hall</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${examData.map(exam => `
+                    ${dayData.map(session => `
                         <tr>
-                            <td>${exam.day}</td>
-                            <td>${exam.date}</td>
-                            <td>${exam.subject}</td>
+                            <td>${session.session}</td>
+                            <td>${session.course}</td>
+                            <td>${session.faculty}</td>
+                            <td>${session.lecHall}</td>
                         </tr>
                     `).join('')}
                 </tbody>
             </table>
-        </div>
-    `;
-}
-
-// Replace the existing event listener with this enhanced version
-function updateTimetable() {
-    // Get the selected values from both dropdowns
-    const selectedClass = classSelect.value;
-    const selectedView = viewSelect.value;
-
-    // Hide the timetable if no class is selected
-    if (!selectedClass) {
-        timetableContainer.style.display = 'none';
-        return;
+        `;
     }
 
-    // Handle different view types
-    if (selectedView === 'exam') {
-        // Display examination timetable
-        const examData = examTimetableData[selectedClass];
-        if (examData) {
-            timetableContent.innerHTML = createExamTable(examData, selectedClass);
-            timetableContainer.style.display = 'block';
-        }
-    } else {
-        // Display regular timetable
-        let allTablesHTML = '';
-        const classData = timetableData[selectedClass];
-        if (classData) {
-            for (const [day, dayData] of Object.entries(classData)) {
-                allTablesHTML += createDayTable(dayData, day);
-            }
-            timetableContent.innerHTML = allTablesHTML;
-            timetableContainer.style.display = 'block';
-        }
-    }
-}
-
-// Set up the event listeners for both dropdowns
-const viewSelect = document.getElementById('viewSelect');
-classSelect.removeEventListener('change', classSelect.onchange); // Remove old listener
-classSelect.addEventListener('change', updateTimetable);
-viewSelect.addEventListener('change', updateTimetable);
-
-        function createDayTable(dayData, day) {
-            let tableHTML = `
-                <div class="day-header">${day}</div>
+    function createExamTable(examData, classSection) {
+        return `
+            <div class="exam-timetable">
+                <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
                 <table class="timetable">
                     <thead>
                         <tr>
-                            <th>Session</th>
-                            <th>Course</th>
-                            <th>Faculty</th>
-                            <th>Lec. Hall</th>
+                            <th>Day</th>
+                            <th>Date</th>
+                            <th>Subject</th>
                         </tr>
                     </thead>
                     <tbody>
-            `;
-            
-            dayData.forEach(session => {
-                tableHTML += `
-                    <tr>
-                        <td>${session.session}</td>
-                        <td>${session.course}</td>
-                        <td>${session.faculty}</td>
-                        <td>${session.lecHall}</td>
-                    </tr>
-                `;
-            });
-            
-            tableHTML += `
+                        ${examData.map(exam => `
+                            <tr>
+                                <td>${exam.day}</td>
+                                <td>${exam.date}</td>
+                                <td>${exam.subject}</td>
+                            </tr>
+                        `).join('')}
                     </tbody>
                 </table>
-            `;
-            return tableHTML;
+            </div>
+        `;
+    }
+
+    function updateTimetable() {
+        const selectedClass = document.getElementById('classSelect').value;
+        const selectedView = document.getElementById('viewSelect').value;
+        const container = document.getElementById('timetableContainer');
+        const content = document.getElementById('timetableContent');
+
+        if (!selectedClass) {
+            container.style.display = 'none';
+            return;
         }
 
-        // Class selection handling
-        const classSelect = document.getElementById('classSelect');
-        const timetableContainer = document.getElementById('timetableContainer');
-        const timetableContent = document.getElementById('timetableContent');
-
-        classSelect.addEventListener('change', function() {
-  const selectedClass = this.value;
-  if (selectedClass === 'CF6') {
-    let allTablesHTML = '';
-    for (const [day, dayData] of Object.entries(timetableData.CF6)) {
-      allTablesHTML += createDayTable(dayData, day);
-    }
-    timetableContent.innerHTML = allTablesHTML;
-    timetableContainer.style.display = 'block';
-  } else if (selectedClass === 'CM2') {
-    let allTablesHTML = '';
-    for (const [day, dayData] of Object.entries(timetableData.CM2)) {
-      allTablesHTML += createDayTable(dayData, day);
-    }
-    timetableContent.innerHTML = allTablesHTML;
-    timetableContainer.style.display = 'block';
-  } else {
-    timetableContainer.style.display = 'none';
-  }
-});
-// Examination timetable data
-const examTimetableData = {
-    "CF6": [
-        { day: "Friday", date: "28-02-2025", subject: "IEPR" },
-        { day: "Monday", date: "03-03-2025", subject: "IT" },
-        { day: "Tuesday", date: "04-03-2025", subject: "IB" },
-        { day: "Wednesday", date: "05-03-2025", subject: "FML [ Batch 1 (9:30 to 11:30), Batch 2(1:30 to 3:30)]" },
-        { day: "Thursday", date: "06-03-2025", subject: "FT" },
-        { day: "Friday", date: "07-03-2025", subject: "FML [ Batch 3 (9:30 to 11:30), Batch 4(1:30 to 3:30)]" }
-    ],
-    "CM2": [
-        { day: "Friday", date: "28-02-2025", subject: "IEPR" },
-        { day: "Monday", date: "03-03-2025", subject: "SM" },
-        { day: "Tuesday", date: "04-03-2025", subject: "B2B" },
-        { day: "Wednesday", date: "05-03-2025", subject: "LM" },
-        { day: "Thursday", date: "06-03-2025", subject: "PM" }
-    ]
-};
-// Function to create regular timetable view
-function createDayTable(dayData, day) {
-    return `
-        <div class="day-header">${day}</div>
-        <table class="timetable">
-            <thead>
-                <tr>
-                    <th>Session</th>
-                    <th>Course</th>
-                    <th>Faculty</th>
-                    <th>Lec. Hall</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${dayData.map(session => `
-                    <tr>
-                        <td>${session.session}</td>
-                        <td>${session.course}</td>
-                        <td>${session.faculty}</td>
-                        <td>${session.lecHall}</td>
-                    </tr>
-                `).join('')}
-            </tbody>
-        </table>
-    `;
-}
-// Function to create exam timetable view
-function createExamTable(examData, classSection) {
-    return `
-        <div class="exam-timetable">
-            <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
-            <table class="timetable">
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Date</th>
-                        <th>Subject</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${examData.map(exam => `
-                        <tr>
-                            <td>${exam.day}</td>
-                            <td>${exam.date}</td>
-                            <td>${exam.subject}</td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-// Main update function that handles both regular and exam timetables
-function updateTimetable() {
-    const selectedClass = document.getElementById('classSelect').value;
-    const selectedView = document.getElementById('viewSelect').value;
-    const timetableContainer = document.getElementById('timetableContainer');
-    const timetableContent = document.getElementById('timetableContent');
-
-    // Hide timetable if no class is selected
-    if (!selectedClass) {
-        timetableContainer.style.display = 'none';
-        return;
-    }
-
-    // Show exam timetable if exam view is selected
-    if (selectedView === 'exam') {
-        const examData = examTimetableData[selectedClass];
-        if (examData) {
-            timetableContent.innerHTML = createExamTable(examData, selectedClass);
-            timetableContainer.style.display = 'block';
-        }
-    } 
-     // Show regular timetable otherwise
-    else {
-        const classData = timetableData[selectedClass];
-        if (classData) {
+        container.style.display = 'block';
+        
+        if (selectedView === 'exam') {
+            content.innerHTML = createExamTable(examTimetableData[selectedClass], selectedClass);
+        } else {
             let allTablesHTML = '';
-            for (const [day, dayData] of Object.entries(classData)) {
+            for (const [day, dayData] of Object.entries(timetableData[selectedClass])) {
                 allTablesHTML += createDayTable(dayData, day);
             }
-            timetableContent.innerHTML = allTablesHTML;
-            timetableContainer.style.display = 'block';
+            content.innerHTML = allTablesHTML;
         }
     }
-}
-// Set up event listeners for both dropdowns
-document.getElementById('classSelect').addEventListener('change', updateTimetable);
-document.getElementById('viewSelect').addEventListener('change', updateTimetable);
 
-// Initialize the function for toggleApplicationForm (keep this from your original code)
-function toggleApplicationForm() {
-    const form = document.getElementById('applicationForm');
-    if (form.style.display === 'none' || form.style.display === '') {
-        form.style.display = 'block';
-    } else {
-        form.style.display = 'none';
-    }
-}
-    </script>
+    // Event listeners
+    document.getElementById('classSelect').addEventListener('change', updateTimetable);
+    document.getElementById('viewSelect').addEventListener('change', updateTimetable);
+</script>
 </body>
 </html>
 
