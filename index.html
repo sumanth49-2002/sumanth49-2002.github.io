@@ -414,26 +414,9 @@
 </div>
 
 <div id="timetableContainer" class="timetable-container" style="display: none;">
-    <div id="timetableContent"></div>
-        
-        <div class="class-select-container">
-            <h3>Class Timetable</h3>
-            <select class="class-select" id="classSelect">
-                <option value="">Select a class</option>
-                <option value="CF1">CF1</option>
-                <option value="CF2">CF2</option>
-                <option value="CF3">CF3</option>
-                <option value="CF4">CF4</option>
-                <option value="CF5">CF5</option>
-                <option value="CF6">CF6</option>
-                <option value="CM2">CM2</option>
-            </select>
-        </div>
-        
-        <div id="timetableContainer" class="timetable-container" style="display: none;">
-            <div id="timetableContent"></div>
-        </div>
+        <div id="timetableContent"></div>
     </div>
+</div>
 
 <footer class="footer">
     <div class="footer-content">
@@ -694,6 +677,94 @@ const examTimetableData = {
         { day: "Thursday", date: "06-03-2025", subject: "PM" }
     ]
 };
+// Function to create regular timetable
+function createDayTable(dayData, day) {
+    return `
+        <div class="day-header">${day}</div>
+        <table class="timetable">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Course</th>
+                    <th>Faculty</th>
+                    <th>Lec. Hall</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${dayData.map(session => `
+                    <tr>
+                        <td>${session.session}</td>
+                        <td>${session.course}</td>
+                        <td>${session.faculty}</td>
+                        <td>${session.lecHall}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+}
+
+// Function to create exam timetable
+function createExamTable(examData, classSection) {
+    return `
+        <div class="exam-timetable">
+            <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${examData.map(exam => `
+                        <tr>
+                            <td>${exam.day}</td>
+                            <td>${exam.date}</td>
+                            <td>${exam.subject}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+// Main update function
+function updateTimetable() {
+    const selectedClass = document.getElementById('classSelect').value;
+    const selectedView = document.getElementById('viewSelect').value;
+    const timetableContainer = document.getElementById('timetableContainer');
+    const timetableContent = document.getElementById('timetableContent');
+
+    if (!selectedClass) {
+        timetableContainer.style.display = 'none';
+        return;
+    }
+
+    if (selectedView === 'exam') {
+        const examData = examTimetableData[selectedClass];
+        if (examData) {
+            timetableContent.innerHTML = createExamTable(examData, selectedClass);
+            timetableContainer.style.display = 'block';
+        }
+    } else {
+        const classData = timetableData[selectedClass];
+        if (classData) {
+            let allTablesHTML = '';
+            for (const [day, dayData] of Object.entries(classData)) {
+                allTablesHTML += createDayTable(dayData, day);
+            }
+            timetableContent.innerHTML = allTablesHTML;
+            timetableContainer.style.display = 'block';
+        }
+    }
+}
+
+// Set up event listeners
+document.getElementById('classSelect').addEventListener('change', updateTimetable);
+document.getElementById('viewSelect').addEventListener('change', updateTimetable);
             
 
     </script>
