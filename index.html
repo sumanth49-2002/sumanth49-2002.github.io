@@ -677,7 +677,7 @@ const examTimetableData = {
         { day: "Thursday", date: "06-03-2025", subject: "PM" }
     ]
 };
-// Function to create regular timetable
+// Function to create regular timetable view
 function createDayTable(dayData, day) {
     return `
         <div class="day-header">${day}</div>
@@ -703,8 +703,7 @@ function createDayTable(dayData, day) {
         </table>
     `;
 }
-
-// Function to create exam timetable
+// Function to create exam timetable view
 function createExamTable(examData, classSection) {
     return `
         <div class="exam-timetable">
@@ -730,26 +729,29 @@ function createExamTable(examData, classSection) {
         </div>
     `;
 }
-
-// Main update function
+// Main update function that handles both regular and exam timetables
 function updateTimetable() {
     const selectedClass = document.getElementById('classSelect').value;
     const selectedView = document.getElementById('viewSelect').value;
     const timetableContainer = document.getElementById('timetableContainer');
     const timetableContent = document.getElementById('timetableContent');
 
+    // Hide timetable if no class is selected
     if (!selectedClass) {
         timetableContainer.style.display = 'none';
         return;
     }
 
+    // Show exam timetable if exam view is selected
     if (selectedView === 'exam') {
         const examData = examTimetableData[selectedClass];
         if (examData) {
             timetableContent.innerHTML = createExamTable(examData, selectedClass);
             timetableContainer.style.display = 'block';
         }
-    } else {
+    } 
+     // Show regular timetable otherwise
+    else {
         const classData = timetableData[selectedClass];
         if (classData) {
             let allTablesHTML = '';
@@ -761,12 +763,19 @@ function updateTimetable() {
         }
     }
 }
-
-// Set up event listeners
+// Set up event listeners for both dropdowns
 document.getElementById('classSelect').addEventListener('change', updateTimetable);
 document.getElementById('viewSelect').addEventListener('change', updateTimetable);
-            
 
+// Initialize the function for toggleApplicationForm (keep this from your original code)
+function toggleApplicationForm() {
+    const form = document.getElementById('applicationForm');
+    if (form.style.display === 'none' || form.style.display === '') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
+}
     </script>
 </body>
 </html>
