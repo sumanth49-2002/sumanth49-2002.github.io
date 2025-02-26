@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumanth M N | Finance Professional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark: #0d0d0d;
+            --darker: #070707;
+            --light: #ffffff;
+            --accent: #4ecca3;
+            --gray: #888888;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        /* Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease;
+            opacity: 0.7;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(7, 7, 7, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 600px;
+            background-color: var(--darker);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image-text {
+            font-size: 10rem;
+            font-weight: 900;
+            color: var(--accent);
+            opacity: 0.8;
+            letter-spacing: -5px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-greeting {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-name span {
+            color: var(--accent);
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--gray);
+        }
+
+        .hero-description {
+            max-width: 500px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: var(--transition);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--accent);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: var(--dark);
+        }
+
+        .social-links {
+            position: fixed;
+            bottom: 50px;
+            left: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .social-link {
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-left {
+            flex: 0 0 200px;
+            padding-right: 30px;
+            text-align: right;
+            padding-top: 5px;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .timeline-right {
+            flex: 1;
+            padding-left: 30px;
+            border-left: 2px solid var(--accent);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-right::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .timeline-description {
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background-color: var(--darker);
+        }
+
+        .skills-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-item {
+            background-color: var(--dark);
+            padding: 30px;
+            border-radius: 5px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .skill-description {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Education Section */
+        .education-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .education-card {
+            background-color: var(--darker);
+            padding: 30px;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .education-card:hover::before {
+            height: 100%;
+        }
+
+        .education-card:hover {
+            transform: translateX(10px);
+        }
+
+        .education-dates {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .education-degree {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .education-institution {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .education-description {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-card {
+            background-color: var(--darker);
+            padding: 30px;
+            border-radius: 5px;
+            transition: var(--transition);
+            border-top: 3px solid transparent;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            border-top: 3px solid var(--accent);
+        }
+
+        .achievement-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .achievement-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .achievement-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .achievement-details {
+            list-style: none;
+        }
+
+        .achievement-details li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .achievement-details li::before {
+            content: '↬';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p, 
+        .contact-details a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-details a:hover {
+            color: var(--accent);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--darker);
+            border: none;
+            border-bottom: 2px solid var(--gray);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+
+        .form-input::placeholder {
+            color: var(--gray);
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: -20px;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: var(--gray);
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .form-textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .form-submit {
+            align-self: flex-start;
+            padding: 12px 30px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .form-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--accent);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .form-submit:hover::before {
+            width: 100%;
+        }
+
+        .form-submit:hover {
+            color: var(--dark);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 50px 0;
+            text-align: center;
+            background-color: var(--darker);
+        }
+
+        .footer-text {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .footer-tagline {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .footer-tagline span {
+            color: var(--accent);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-link {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                order: -1;
+                height: 400px;
+            }
+
+            .hero-image-text {
+                font-size: 8rem;
+            }
+
+            .social-links {
+                position: static;
+                flex-direction: row;
+                margin-top: 30px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--darker);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+                z-index: 1000;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.2rem;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-left {
+                flex: 0 0 auto;
+                padding-right: 0;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+
+            .timeline-right {
+                padding-left: 20px;
+            }
+
+            .footer-tagline {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero-image-text {
+                font-size: 6rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Sumanth<span>.</span></a>
+            <button class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <p class="hero-greeting">Hello, I'm</p>
+                <h1 class="hero-name">Sumanth <span>M N</span></h1>
+                <h2 class="hero-title">Finance Professional | Investment Banking Specialist</h2>
+                <p class="hero-description">A final-year MBA student specializing in Finance with a passion for Investment Banking. I possess strong communication skills and expertise in financial analysis, valuation, and management accounting.</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+            <div class="hero-image">
+                <h1 class="hero-image-text">S</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">My Introduction</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am a Finance professional with a strong foundation in Investment Banking principles. My expertise includes financial analysis, valuation methods, and management accounting practices that drive strategic decision-making.</p>
+                    <p>I am passionate about mergers and acquisitions, financial modeling, and helping organizations achieve their growth objectives through sound financial strategies. I bring strong analytical skills and the ability to communicate complex financial concepts effectively.</p>
+                    <div class="about-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sumanth_mn23@cms.ac.in</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 6363222380</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bangalore, Karnataka</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>MBA Finance</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <!-- Content will be added with JavaScript animations -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">My Journey</p>
+            </div>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-date">February 2024</div>
+                    </div>
+                    <div class="timeline-right">
+                        <h3 class="timeline-title">Investment Banking Job Simulation</h3>
+                        <p class="timeline-company">JPMorgan Chase</p>
+                        <p class="timeline-description">
+                            • Identified an ideal M&A target for a client based on strategic and financial criteria<br>
+                            • Constructed a DCF model to calculate the valuation of the M&A target<br>
+                            • Adjusted the model to account for a competitor bid and supply chain interruption<br>
+                            • Created a 2-pager for the client containing a company profile and auction process summary
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-date">February 2024</div>
+                    </div>
+                    <div class="timeline-right">
+                        <h3 class="timeline-title">Fin Quest 2024</h3>
+                        <p class="timeline-company">IMA Bangalore Chapter</p>
+                        <p class="timeline-description">
+                            Participated as a member of the Institute of Management Accountants (IMA) in Fin Quest 2024, focusing on financial innovations, strategic management accounting, and emerging trends in finance.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-date">2022</div>
+                    </div>
+                    <div class="timeline-right">
+                        <h3 class="timeline-title">CONCERENZA - 1st Place</h3>
+                        <p class="timeline-company">RG Institute of Commerce and Management</p>
+                        <p class="timeline-description">
+                            Secured first place in a prestigious finance competition, demonstrating strong financial analysis and problem-solving skills.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-date">2023</div>
+                    </div>
+                    <div class="timeline-right">
+                        <h3 class="timeline-title">IGNATIUS 2K23 - 2nd Place</h3>
+                        <p class="timeline-company">Mangalore University</p>
+                        <p class="timeline-description">
+                            Achieved second place in this competitive finance event, showcasing advanced financial knowledge and analytical capabilities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+                <p class="section-subtitle">My Expertise</p>
+            </div>
+            <div class="skills-content">
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="skill-title">Financial Analysis</h3>
+                    <p class="skill-description">Comprehensive analysis of financial statements to evaluate performance and make informed decisions.</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="skill-title">Valuation Models</h3>
+                    <p class="skill-description">Expertise in DCF, DDM, and relative valuation methods to determine company worth.</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="skill-title">M&A Process</h3>
+                    <p class="skill-description">Understanding of mergers and acquisitions processes, from screening to implementation.</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="skill-title">Financial Modeling</h3>
+                    <p class="skill-description">Building comprehensive financial models to project future performance and valuations.</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-comments-dollar"></i>
+                    </div>
+                    <h3 class="skill-title">Client Communication</h3>
+                    <p class="skill-description">Strong ability to communicate complex financial concepts to clients effectively.</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="skill-title">Strategic Planning</h3>
+                    <p class="skill-description">Developing strategic rationales and supporting decision-making processes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <p class="section-subtitle">Academic Background</p>
+            </div>
+            <div class="education-cards">
+                <div class="education-card">
+                    <div class="education-dates">Aug 2023 – June 2025</div>
+                    <h3 class="education-degree">Master of Business Administration</h3>
+                    <p class="education-institution">Centre for Management Studies (Jain University)</p>
+                    <p class="education-description">Specialization in Finance with a current SGPA of 7.76 (2nd Semester)</p>
+                </div>
+                <div class="education-card">
+                    <div class="education-dates">2020 - 2023</div>
+                    <h3 class="education-degree">Bachelor of Commerce</h3>
+                    <p class="education-institution">RG Institute of Commerce and Management</p>
+                    <p class="education-description">Completed with a C.G.P.A of 7.64</p>
+                </div>
+                <div class="education-card">
+                    <div class="education-dates">2018 - 2020</div>
+                    <h3 class="education-degree">Pre-University | Commerce</h3>
+                    <p class="education-institution">Sir MV PU College</p>
+                    <p class="education-description">Achieved 85.33% in Commerce stream</p>
+                </div>
+                <div class="education-card">
+                    <div class="education-dates">2017 - 2018</div>
+                    <h3 class="education-degree">10th Standard | CBSE</h3>
+                    <p class="education-institution">Smt Pushpa Shamanur Mahalingappa Residencial School</p>
+                    <p class="education-description">Completed with 70.66%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="section skills-section" id="achievements">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-subtitle">Professional Development</p>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <h3 class="achievement-title">JPMorgan Chase Investment Banking Job Simulation</h3>
+                    <p class="achievement-date">February 2024 | Forage</p>
+                    <ul class="achievement-details">
+                        <li>Identified ideal M&A targets using strategic criteria</li>
+                        <li>Created a DCF valuation model with scenario analysis</li>
+                        <li>Prepared client-facing documentation</li>
+                    </ul>
+                </div>
+                <div class="achievement-card">
+                    <h3 class="achievement-title">Discounted Cash Flow Modeling</h3>
+                    <p class="achievement-date">November 2024 | Coursera Project Network</p>
+                    <p class="achievement-description">
+                        Completed certification in Discounted Cash Flow Modeling, enhancing skills in financial valuation techniques.
+                    </p>
+                </div>
+                <div class="achievement-card">
+                    <h3 class="achievement-title">Tableau Fundamentals</h3>
+                    <p class="achievement-date">November 2024 | Corporate Finance Institute</p>
+                    <p class="achievement-description">
+                        Mastered data visualization techniques using Tableau for financial reporting and business intelligence.
+                    </p>
+                </div>
+                <div class="achievement-card">
+                    <h3 class="achievement-title">Fin Quest 2024 Participant</h3>
+                    <p class="achievement-date">February 2024 | IMA Bangalore Chapter</p>
+                    <p class="achievement-description">
+                        Participated in a focused event on financial innovations and strategic management accounting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">Get In Touch</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:sumanth_mn23@cms.ac.in">sumanth_mn23@cms.ac.in</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 6363222380</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Bangalore, Karnataka, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>LinkedIn</h3>
+                            <a href="#">Connect with me</a>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="name" placeholder=" " required>
+                        <label for="name" class="form-label">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" id="email" placeholder=" " required>
+                        <label for="email" class="form-label">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="subject" placeholder=" " required>
+                        <label for="subject" class="form-label">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input form-textarea" id="message" placeholder=" " required></textarea>
+                        <label for="message" class="form-label">Your Message</label>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Finance Professional & Investment Banking Specialist</p>
+            <h2 class="footer-tagline">I analyze <span>financial systems</span></h2>
+            <div class="footer-social">
+                <a href="#" class="footer-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="footer-link"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sumanth M N. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', function() {
+            const cursor = document.getElementById('cursor');
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
+        });
+
+        document.addEventListener('mouseup', function() {
+            const cursor = document.getElementById('cursor');
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                this.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Sticky header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // About section animation
+        const aboutImage = document.querySelector('.about-image');
+        
+        function createCircles() {
+            for (let i = 0; i < 5; i++) {
+                const circle = document.createElement('div');
+                circle.style.width = Math.random() * 100 + 50 + 'px';
+                circle.style.height = circle.style.width;
+                circle.style.backgroundColor = 'rgba(78, 204, 163, ' + (Math.random() * 0.2 + 0.05) + ')';
+                circle.style.borderRadius = '50%';
+                circle.style.position = 'absolute';
+                circle.style.top = Math.random() * 100 + '%';
+                circle.style.left = Math.random() * 100 + '%';
+                circle.style.transform = 'translate(-50%, -50%)';
+                circle.style.animation = 'float ' + (Math.random() * 5 + 5) + 's ease-in-out infinite';
+                circle.style.animationDelay = Math.random() * 5 + 's';
+                
+                aboutImage.appendChild(circle);
+            }
+        }
+        
+        createCircles();
+
+        // Contact form
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('.form-submit');
+            const originalText = submitBtn.innerText;
+            
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Message sent successfully!');
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+                contactForm.reset();
+            }, 1500);
+        });
+
+        // Active navigation link based on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
