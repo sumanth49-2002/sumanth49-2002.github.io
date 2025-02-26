@@ -4,618 +4,1782 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Russian Business School - Bangalore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         /* Core styles */
-        body {
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --primary-dark: #0f172a;
+            --accent: #dc2626;
+            --accent-light: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8fafc;
+            overflow-x: hidden;
         }
 
-        /* Banner */
+        /* Utils */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(30, 58, 138, 0.1);
+        }
+
+        .button:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(30, 58, 138, 0.15);
+        }
+
+        .button.accent {
+            background: var(--accent);
+        }
+
+        .button.accent:hover {
+            background: var(--accent-light);
+        }
+
+        .button.outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .button.outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-5 { margin-bottom: 3rem; }
+
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 3rem; }
+
+        /* Announcement Banner */
         .announcement {
-            background-color: #dc2626;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
             color: white;
             text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            animation: pulse 2s infinite;
+            padding: 12px;
+            font-weight: 600;
+            position: relative;
+            z-index: 100;
         }
 
-        @keyframes pulse {
-            0% { background-color: #dc2626; }
-            50% { background-color: #ef4444; }
-            100% { background-color: #dc2626; }
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .announcement i {
+            animation: heartBeat 1.5s infinite;
         }
 
         /* Navigation */
         .nav {
-            background-color: #1e3a8a;
-            padding: 1rem;
-            color: white;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 0.5rem 0;
         }
 
         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: 50px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
             align-items: center;
         }
 
         .nav-links a {
-            color: white;
+            color: var(--dark);
             text-decoration: none;
             padding: 0.5rem 1rem;
-            margin: 0 0.5rem;
+            margin: 0 0.25rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
-            background-color: #1e40af;
-            border-radius: 4px;
+            color: var(--primary);
         }
 
-        /* Hero section */
+        .nav-links a:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
         .hero {
-            background-color: #1e3a8a;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(37, 99, 235, 0.9) 100%), url('/api/placeholder/1200/600') no-repeat center center/cover;
             color: white;
-            padding: 4rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
             position: relative;
         }
 
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero p {
             font-size: 1.25rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: white;
+            padding: 3rem 0;
+            position: relative;
+            margin-top: -70px;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+            z-index: 5;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 1.1rem;
         }
 
         /* Application Form */
+        .application-section {
+            padding: 6rem 0;
+            background-color: var(--light);
+        }
+
+        .application-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .application-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .application-info p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .application-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            background-color: rgba(37, 99, 235, 0.1);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h4 {
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+
+        .feature-text p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
         .application-form {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
             background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            display: none;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--gray);
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: bold;
+            font-weight: 500;
+            color: var(--dark);
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        /* Sections */
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--primary-light);
+        }
+
+        /* Section Styling */
         .section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .section h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
+        /* Leadership Section */
+        .leadership-section {
+            background-color: white;
         }
 
-        /* Leadership Grid */
         .leadership-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2.5rem;
         }
 
         .leadership-card {
-            text-align: center;
-            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .leadership-card img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+        .leadership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .leadership-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .leadership-card:hover .leadership-img {
+            transform: scale(1.05);
+        }
+
+        .leadership-info {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: white;
+        }
+
+        .leadership-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .leadership-role {
+            color: var(--primary);
+            font-weight: 500;
             margin-bottom: 1rem;
+        }
+
+        .leadership-social {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Programs Section */
+        .programs-section {
+            background-color: var(--light);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .program-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .program-img {
+            width: 100%;
+            height: 200px;
             object-fit: cover;
         }
 
-        /* Programs Grid */
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-  /* Timetable Styles */
-.timetable-container {
-    margin: 2rem auto;
-    max-width: 1000px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-}
-
-.day-header {
-    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-    color: white;
-    font-weight: 600;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
-}
-
-.timetable {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: white;
-    margin: 0;
-}
-
-.timetable thead {
-    background: #f8fafc;
-}
-
-.timetable th {
-    background: #e2e8f0;
-    color: #1e3a8a;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    border-bottom: 2px solid #cbd5e1;
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    letter-spacing: 0.5px;
-}
-
-.timetable td {
-    padding: 1rem;
-    border-bottom: 1px solid #e2e8f0;
-    color: #475569;
-    transition: all 0.2s ease;
-}
-
-.timetable tr:hover td {
-    background-color: #f1f5f9;
-    color: #1e3a8a;
-}
-
-/* Column-specific styles */
-.timetable td:nth-child(1) {
-    font-weight: 600;
-    color: #2563eb;  /* Session time in blue */
-}
-
-.timetable td:nth-child(2) {
-    font-weight: 500;
-    color: #1e40af;  /* Course name in darker blue */
-}
-
-.timetable td:nth-child(3) {
-    color: #475569;  /* Faculty in gray */
-}
-
-.timetable td:nth-child(4) {
-    color: #64748b;  /* Lecture hall in lighter gray */
-    text-align: center;
-}
-
-/* Class selection styles */
-.class-select-container {
-    margin: 3rem 0;
-    text-align: center;
-}
-
-.class-select-container h3 {
-    color: #1e3a8a;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.class-select {
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    width: auto;
-    min-width: 200px;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-    background-color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.class-select:hover {
-    border-color: #2563eb;
-}
-
-.class-select:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
+        .program-content {
+            padding: 2rem;
         }
 
-        /* Current program card styles end here */
-.program-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+        .program-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
 
-/* Add the new footer styles here */
-/* Enhanced Footer Styles */
-/* Footer styles */
+        .program-text {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .program-features {
+            margin-bottom: 1.5rem;
+        }
+
+        .program-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .program-feature i {
+            color: var(--primary);
+            margin-right: 0.75rem;
+        }
+
+        /* Timetable Section */
+        .timetable-section {
+            background-color: white;
+            padding-bottom: 8rem;
+        }
+
+        .class-select-container {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .class-select-container h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .select-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .class-select {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            min-width: 200px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .class-select:hover {
+            border-color: var(--primary-light);
+        }
+
+        .class-select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .timetable-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .timetable-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 1.25rem;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            margin: 0;
+        }
+
+        .timetable thead {
+            background: var(--light);
+        }
+
+        .timetable th {
+            background: var(--gray-light);
+            color: var(--primary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #cbd5e1;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+
+        .timetable td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            color: var(--gray);
+            transition: all 0.2s ease;
+        }
+
+        .timetable tr:hover td {
+            background-color: rgba(37, 99, 235, 0.05);
+            color: var(--primary);
+        }
+
+        .timetable td:nth-child(1) {
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+
+        .timetable td:nth-child(2) {
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .timetable td:nth-child(3) {
+            color: var(--dark);
+        }
+
+        .timetable td:nth-child(4) {
+            color: var(--gray);
+            text-align: center;
+        }
+
+        /* Footer */
         .footer {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            color: #f8fafc;
-            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--light);
+            padding: 5rem 0 2rem;
             position: relative;
             overflow: hidden;
         }
-        
-        /* ... rest of the footer styles ... */
 
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-text p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .footer-links a {
+            display: block;
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .footer-links i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .footer-form p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-form-group {
+            display: flex;
+        }
+
+        .footer-input {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 0.8rem 1rem;
+            border-radius: 5px 0 0 5px;
+            color: white;
+        }
+
+        .footer-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .footer-button {
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footer-button:hover {
+            background-color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .application-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .application-info {
+                order: 2;
+            }
+
+            .application-form {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 5rem 2rem 2rem;
+                transition: all 0.4s ease;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+
+            .mobile-toggle {
+                display: block;
+                z-index: 101;
+            }
+
+            .close-menu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--primary);
+                cursor: pointer;
+            }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease;
+                z-index: 99;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-header h3 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <!-- Announcement Banner -->
-    <div class="announcement">Join RBS!!!</div>
+    <div class="announcement">
+        <div class="announcement-content">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Admissions Open for 2025 Academic Year - Limited Seats Available!</span>
+            <a href="#apply" class="button accent" style="margin-left: 15px; padding: 0.4rem 1rem; font-size: 0.9rem;">Apply Now</a>
+        </div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="logo">Russian Business School</div>
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">Programs</a>
-                <a href="#">Faculty</a>
-                <a href="#">Admissions</a>
-                <a href="#">Contact</a>
-                <a href="#timetables">Timetables</a>
+    <nav class="nav" id="mainNav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="logo-img">RBS</div>
+                    <span>Russian Business School</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <button class="close-menu" id="closeMenu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <a href="#home">Home</a>
+                    <a href="#programs">Programs</a>
+                    <a href="#faculty">Faculty</a>
+                    <a href="#timetables">Timetables</a>
+                    <a href="#apply">Admissions</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <!-- Hero Section -->
-    <div class="hero">
-        <h1>Shape Your Future in Business</h1>
-        <p>Join Bangalore's premier Russian business education institution</p>
-        <button class="button" onclick="toggleApplicationForm()">Apply Now</button>
-    </div>
-
-    <!-- Application Form -->
-    <div id="applicationForm" class="application-form">
-        <h2>Application Form</h2>
-        <form>
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" required>
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" required>
-            </div>
-            <div class="form-group">
-                <label>Program of Interest</label>
-                <select>
-                    <option>MBA - Finance</option>
-                    <option>MBA - Marketing</option>
-                    <option>MBA - HR</option>
-                    <option>MBA - Data Analytics</option>
-                </select>
-            </div>
-            <button type="submit" class="button" style="background-color: #1e3a8a; color: white; width: 100%;">Submit Application</button>
-        </form>
-    </div>
-
-    <!-- Leadership Section -->
-    <div class="section">
-        <h2>Our Leadership</h2>
-        <div class="leadership-grid">
-            <div class="leadership-card">
-                <img src="chairman.jpg" alt="Chairman">
-                <h3>Pranav Chauhan</h3>
-                <p>Chairman</p>
-            </div>
-            <div class="leadership-card">
-                <img src="/api/placeholder/150/150" alt="Dean">
-                <h3>Sumanth M N</h3>
-                <p>Dean & HOD of Finance</p>
-            </div>
-            <div class="leadership-card">
-                <img src="/api/placeholder/150/150" alt="HOD Marketing">
-                <h3>Sandesh</h3>
-                <p>HOD of Marketing</p>
-            </div>
-            <div class="leadership-card">
-                <img src="/api/placeholder/150/150" alt="HOD HR">
-                <h3>Vishal</h3>
-                <p>HOD of HR</p>
-            </div>
-            <div class="leadership-card">
-                <img src="/api/placeholder/150/150" alt="HOD Data Analytics">
-                <h3>Darshan</h3>
-                <p>HOD of Data Analytics</p>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Shape Your Future in Global Business</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Join Bangalore's premier Russian business education institution for world-class education and global opportunities</p>
+            <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#apply" class="button">Apply Now</a>
+                <a href="#programs" class="button outline">Explore Programs</a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-count="98">0</div>
+                <div class="stat-label">Placement Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="25">0</div>
+                <div class="stat-label">Global Partners</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="5000">0</div>
+                <div class="stat-label">Alumni Network</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="45">0</div>
+                <div class="stat-label">Faculty Experts</div>
+            </div>
+        </div>
+    </section>
 
     <!-- Programs Section -->
-    <div class="section" style="background-color: #f3f4f6;">
-        <h2>Our Programs</h2>
+    <section class="section programs-section" id="programs">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Programs</h2>
+                <p class="section-subtitle">Comprehensive business education programs designed to meet the demands of today's global economy</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card animate__animated animate__fadeInUp">
+                    <img src="/api/placeholder/400/200" alt="Finance Program" class="program-img">
+                    <div class="program-content">
+                        <h3 class="program-title">MBA in Finance</h3>
+                        <p class="program-text">Master financial strategies, investment management, and global financial markets with our comprehensive program.</p>
+                        <div class="program-features">
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Advanced financial analysis</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Investment portfolio management</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Risk assessment strategies</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="button">Learn More</a>
+                    </div>
+                </div>
+                <div class="program-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <img src="/api/placeholder/400/200" alt="Marketing Program" class="program-img">
+                    <div class="program-content">
+                        <h3 class="program-title">MBA in Marketing</h3>
+                        <p class="program-text">Develop advanced marketing strategies, brand management skills, and digital marketing expertise.</p>
+                        <div class="program-features">
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Digital marketing strategies</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Consumer behavior analysis</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Global brand management</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="button">Learn More</a>
+                    </div>
+                </div>
+                <div class="program-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <img src="/api/placeholder/400/200" alt="HR Program" class="program-img">
+                    <div class="program-content">
+                        <h3 class="program-title">MBA in HR</h3>
+                        <p class="program-text">Master human resource management, organizational behavior, and talent acquisition strategies.</p>
+                        <div class="program-features">
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Talent management</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Organizational development</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Strategic HR planning</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="button">Learn More</a>
+                    </div>
+                </div>
+                <div class="program-card animate__animated animate__fadeInUp animate__delay-3s">
+                    <img src="/api/placeholder/400/200" alt="Data Analytics Program" class="program-img">
+                    <div class="program-content">
+                        <h3 class="program-title">MBA in Data Analytics</h3>
+                        <p class="program-text">Learn advanced data analysis, business intelligence, and data-driven decision making for modern business needs.</p>
+                        <div class="program-features">
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Business intelligence tools</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Predictive analytics</span>
+                            </div>
+                            <div class="program-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Data visualization techniques</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
-        <div class="programs-grid">
-            <div class="program-card">
-                <h3>MBA in Finance</h3>
-                <p>Master financial strategies and investment management.</p>
+    <!-- Leadership Section -->
+    <section class="section leadership-section" id="faculty">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Leadership</h2>
+                <p class="section-subtitle">Meet the distinguished academics and industry experts who guide our institution</p>
             </div>
-            <div class="program-card">
-                <h3>MBA in Marketing</h3>
-                <p>Develop advanced marketing and brand management skills.</p>
-            </div>
-            <div class="program-card">
-                <h3>MBA in HR</h3>
-                <p>Master human resource management and organizational behavior.</p>
-            </div>
-            <div class="program-card">
-                <h3>MBA in Data Analytics</h3>
-                <p>Learn advanced data analysis and business intelligence.</p>
+            <div class="leadership-grid">
+                <div class="leadership-card">
+                    <img src="/api/placeholder/400/400" alt="Chairman" class="leadership-img">
+                    <div class="leadership-info">
+                        <h3 class="leadership-name">Pranav Chauhan</h3>
+                        <p class="leadership-role">Chairman</p>
+                        <div class="leadership-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leadership-card">
+                    <img src="/api/placeholder/400/400" alt="Dean" class="leadership-img">
+                    <div class="leadership-info">
+                        <h3 class="leadership-name">Sumanth M N</h3>
+                        <p class="leadership-role">Dean & HOD of Finance</p>
+                        <div class="leadership-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leadership-card">
+                    <img src="/api/placeholder/400/400" alt="HOD Marketing" class="leadership-img">
+                    <div class="leadership-info">
+                        <h3 class="leadership-name">Sandesh</h3>
+                        <p class="leadership-role">HOD of Marketing</p>
+                        <div class="leadership-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leadership-card">
+                    <img src="/api/placeholder/400/400" alt="HOD HR" class="leadership-img">
+                    <div class="leadership-info">
+                        <h3 class="leadership-name">Vishal</h3>
+                        <p class="leadership-role">HOD of HR</p>
+                        <div class="leadership-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leadership-card">
+                    <img src="/api/placeholder/400/400" alt="HOD Data Analytics" class="leadership-img">
+                    <div class="leadership-info">
+                        <h3 class="leadership-name">Darshan</h3>
+                        <p class="leadership-role">HOD of Data Analytics</p>
+                        <div class="leadership-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-<div class="class-select-container">
-    <h3>Class Schedule</h3>
-    <div class="flex justify-center space-x-4">
-        <select class="class-select" id="viewSelect">
-            <option value="regular">Regular Timetable</option>
-            <option value="exam">Mid Term Examination</option>
-        </select>
-        
-        <select class="class-select" id="classSelect">
-            <option value="">Select a class</option>
-            <option value="CF6">CF6</option>
-            <option value="CM2">CM2</option>
-        </select>
-    </div>
-</div>
+    </section>
 
-<div id="timetableContainer" class="timetable-container" style="display: none;">
-        <div id="timetableContent"></div>
-    </div>
-</div>
+    <!-- Timetable Section -->
+    <section class="section timetable-section" id="timetables">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Class Schedules</h2>
+                <p class="section-subtitle">View your class timetables and examination schedules</p>
+            </div>
+            <div class="class-select-container">
+                <h3>Select Your Class</h3>
+                <div class="select-container">
+                    <select class="class-select" id="viewSelect">
+                        <option value="regular">Regular Timetable</option>
+                        <option value="exam">Mid Term Examination</option>
+                    </select>
+                    
+                    <select class="class-select" id="classSelect">
+                        <option value="">Select a class</option>
+                        <option value="CF6">CF6</option>
+                        <option value="CM2">CM2</option>
+                    </select>
+                </div>
+            </div>
+            <div id="timetableContainer" class="timetable-container">
+                <div id="timetableContent"></div>
+            </div>
+        </div>
+    </section>
 
-<footer class="footer">
-    <div class="footer-content">
-        <div>
-            <h3>Russian Business School</h3>
-            <p>Shaping tomorrow's business leaders through excellence in education, innovation, and global perspective.</p>
-        </div>
-        <div>
-            <h3>Contact</h3>
-            <div class="address-info">
-                <span class="contact-icon">📍</span>
-                <p>Location: Bangalore, Karnataka, India</p>
+    <!-- Application Section -->
+    <section class="application-section" id="apply">
+        <div class="container">
+            <div class="application-container">
+                <div class="application-info">
+                    <h2>Begin Your Journey</h2>
+                    <p>Take the first step towards a successful global business career by applying to our world-class programs.</p>
+                    <div class="application-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>World-Class Education</h4>
+                                <p>Curriculum designed in collaboration with industry experts and global academic partners.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-globe-asia"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Global Perspective</h4>
+                                <p>Exchange programs with leading universities in Russia and other international destinations.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Industry Connections</h4>
+                                <p>Regular interactions with industry leaders and corporate partners through guest lectures and seminars.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Career Support</h4>
+                            <p>Dedicated placement cell to help you launch your career with top organizations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="application-form" id="applicationForm">
+                    <div class="form-header">
+                        <h3>Application Form</h3>
+                        <p>Fill out the form below to start your application process</p>
+                    </div>
+                    <form id="admissionForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="program">Program of Interest</label>
+                            <select id="program" class="form-control">
+                                <option value="">-- Select Program --</option>
+                                <option>MBA - Finance</option>
+                                <option>MBA - Marketing</option>
+                                <option>MBA - HR</option>
+                                <option>MBA - Data Analytics</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Additional Information</label>
+                            <textarea id="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Submit Application</button>
+                    </form>
+                </div>
             </div>
-            <div class="address-info">
-                <span class="contact-icon">✉️</span>
-                <p>Email: info@russianbs.edu</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3>Russian Business School</h3>
+                    <p>Shaping tomorrow's business leaders through excellence in education, innovation, and global perspective.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p>123 Education Street, Koramangala</p>
+                                <p>Bangalore, Karnataka, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p>info@russianbs.edu</p>
+                                <p>admissions@russianbs.edu</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p>+91 80 1234 5678</p>
+                                <p>+91 9876 543210</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#home"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="#programs"><i class="fas fa-chevron-right"></i> Programs</a>
+                        <a href="#faculty"><i class="fas fa-chevron-right"></i> Faculty</a>
+                        <a href="#timetables"><i class="fas fa-chevron-right"></i> Timetables</a>
+                        <a href="#apply"><i class="fas fa-chevron-right"></i> Admissions</a>
+                        <a href="#"><i class="fas fa-chevron-right"></i> News & Events</a>
+                        <a href="#"><i class="fas fa-chevron-right"></i> Career Opportunities</a>
+                        <a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter to receive updates about new programs, events, and admission deadlines.</p>
+                    <div class="footer-form">
+                        <div class="footer-form-group">
+                            <input type="email" class="footer-input" placeholder="Your Email">
+                            <button class="footer-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="address-info">
-                <span class="contact-icon">📞</span>
-                <p>Phone: +91 XXXXXXXXXX</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Russian Business School - Bangalore. All Rights Reserved.</p>
             </div>
         </div>
-        <div>
-            <h3>Quick Links</h3>
-            <p><a href="#">About Us</a></p>
-            <p><a href="#">Programs</a></p>
-            <p><a href="#">Admissions</a></p>
-            <p><a href="#">News & Events</a></p>
-            <p><a href="#">Career Opportunities</a></p>
-        </div>
-    </div>
-</footer>
+    </footer>
+
     <script>
-    // Application form toggle
-    function toggleApplicationForm() {
-        const form = document.getElementById('applicationForm');
-        if (form.style.display === 'none' || form.style.display === '') {
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
-        }
-    }
-        // Timetable data
-        const timetableData = {
-            "CF6": {
-                 "Monday": [
-                    { date: "17-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "PFF", faculty: "SR", lecHall: "303" },
-                    { date: "17-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IEPR", faculty: "SBC", lecHall: "303" },
-                    { date: "17-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "FML", faculty: "GM", lecHall: "303" },
-                    { date: "17-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "IB", faculty: "VYJ", lecHall: "303" }
-                ],
-        
-                "Tuesday": [
-                    { date: "18-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "FML", faculty: "GM", lecHall: "303" },
-                    { date: "18-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "FML", faculty: "GM", lecHall: "303" },
-                    { date: "18-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "PFF", faculty: "SR", lecHall: "303" },
-                    { date: "18-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "IEPR", faculty: "SBC", lecHall: "303" }
-                ],
-                "wednesday": [
-                    { date: "19-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IT", faculty: "SS", lecHall: "303" },
-                    { date: "19-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IT", faculty: "SS", lecHall: "303" },
-                    { date: "19-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "Club.Act", faculty: "--", lecHall: "--" },
-                    { date: "19-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "Club.Act", faculty: "--", lecHall: "--" }
-                ],
-                "Thursday": [
-                    { date: "20-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IEPR", faculty: "SBC", lecHall: "303" },
-                    { date: "20-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IB", faculty: "SR", lecHall: "303" },
-                    { date: "20-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "PFF", faculty: "SR", lecHall: "303" },
-                    { date: "20-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
-                ],
-            },
-         "CM2": {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation toggle
+            const mobileToggle = document.getElementById('mobileToggle');
+            const closeMenu = document.getElementById('closeMenu');
+            const navLinks = document.getElementById('navLinks');
+            const navOverlay = document.getElementById('navOverlay');
             
-               "Monday": [
-                  { date: "17-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "STM", faculty: "KKS", lecHall: "610" },
-                  { date: "17-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "IEPR", faculty: "DJS", lecHall: "610" },
-                  { date: "17-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "PM", faculty: "Anup", lecHall: "610" },
-                  { date: "17-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "M3", faculty: "UC", lecHall: "306" }
-                ],
-               "Tuesday": [
-                  { date: "18-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "M3", faculty: "RS", lecHall: "206" },
-                  { date: "18-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "LM", faculty: "SG", lecHall: "610" },
-                  { date: "18-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "B2B", faculty: "UC", lecHall: "610" },
-                  { date: "18-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
-                ],
-               "wednesday": [
-                  { date: "19-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "LM", faculty: "SUS", lecHall: "610" },
-                  { date: "19-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "B2B", faculty: "UC", lecHall: "610" },
-                  { date: "19-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "IEPR", faculty: "DJS", lecHall: "610" },
-                  { date: "19-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "PM", faculty: "Anup", lecHall: "610" }
-                 ],
-
-                "Thursday": [
-                  { date: "20-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "LM", faculty: "SUS", lecHall: "610" },
-                  { date: "20-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "CWC", faculty: "SG", lecHall: "610" },
-                  { date: "20-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "Club.Act", faculty: "--", lecHall: "--" },
-                  { date: "20-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "Club.Act", faculty: "--", lecHall: "--" }
-                 ], 
-            } 
-        };
- // Exam timetable data
-    const examTimetableData = {
-        "CF6": [
-            { day: "Friday", date: "28-02-2025", subject: "IEPR" },
-            { day: "Monday", date: "03-03-2025", subject: "IT" },
-            { day: "Tuesday", date: "04-03-2025", subject: "IB" },
-            { day: "Wednesday", date: "05-03-2025", subject: "FML [ Batch 1 (9:30 to 11:30), Batch 2(1:30 to 3:30)]" },
-            { day: "Thursday", date: "06-03-2025", subject: "FT" },
-            { day: "Friday", date: "07-03-2025", subject: "FML [ Batch 3 (9:30 to 11:30), Batch 4(1:30 to 3:30)]" }
-        ],
-        "CM2": [
-            { day: "Friday", date: "28-02-2025", subject: "IEPR" },
-            { day: "Monday", date: "03-03-2025", subject: "SM" },
-            { day: "Tuesday", date: "04-03-2025", subject: "B2B" },
-            { day: "Wednesday", date: "05-03-2025", subject: "LM" },
-            { day: "Thursday", date: "06-03-2025", subject: "PM" }
-        ]
-    };
-
-    function createDayTable(dayData, day) {
-        return `
-            <div class="day-header">${day}</div>
-            <table class="timetable">
-                <thead>
-                    <tr>
-                        <th>Session</th>
-                        <th>Course</th>
-                        <th>Faculty</th>
-                        <th>Lec. Hall</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${dayData.map(session => `
-                        <tr>
-                            <td>${session.session}</td>
-                            <td>${session.course}</td>
-                            <td>${session.faculty}</td>
-                            <td>${session.lecHall}</td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        `;
-    }
-
-    function createExamTable(examData, classSection) {
-        return `
-            <div class="exam-timetable">
-                <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
-                <table class="timetable">
-                    <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Date</th>
-                            <th>Subject</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${examData.map(exam => `
-                            <tr>
-                                <td>${exam.day}</td>
-                                <td>${exam.date}</td>
-                                <td>${exam.subject}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
-    }
-
-    function updateTimetable() {
-        const selectedClass = document.getElementById('classSelect').value;
-        const selectedView = document.getElementById('viewSelect').value;
-        const container = document.getElementById('timetableContainer');
-        const content = document.getElementById('timetableContent');
-
-        if (!selectedClass) {
-            container.style.display = 'none';
-            return;
-        }
-
-        container.style.display = 'block';
-        
-        if (selectedView === 'exam') {
-            content.innerHTML = createExamTable(examTimetableData[selectedClass], selectedClass);
-        } else {
-            let allTablesHTML = '';
-            for (const [day, dayData] of Object.entries(timetableData[selectedClass])) {
-                allTablesHTML += createDayTable(dayData, day);
+            mobileToggle.addEventListener('click', function() {
+                navLinks.classList.add('active');
+                navOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            const closeNav = function() {
+                navLinks.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+            
+            closeMenu.addEventListener('click', closeNav);
+            navOverlay.addEventListener('click', closeNav);
+            
+            // Close nav when clicking on nav links (mobile)
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', closeNav);
+            });
+            
+            // Scroll Effects
+            const nav = document.getElementById('mainNav');
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                // Navbar shrink on scroll
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                // Back to top button visibility
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+                
+                // Animate stats on scroll
+                const stats = document.querySelectorAll('.stat-number');
+                stats.forEach(stat => {
+                    const position = stat.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (position < screenPosition) {
+                        animateStats(stat);
+                    }
+                });
+            });
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Animate stats counter
+            function animateStats(el) {
+                if (el.dataset.animated) return;
+                el.dataset.animated = true;
+                
+                const target = +el.dataset.count;
+                let count = 0;
+                const duration = 2000; // 2 seconds
+                const increment = Math.ceil(target / (duration / 30));
+                
+                const counter = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        el.textContent = target;
+                        clearInterval(counter);
+                    } else {
+                        el.textContent = count;
+                    }
+                }, 30);
             }
-            content.innerHTML = allTablesHTML;
-        }
-    }
 
-    // Event listeners
-    document.getElementById('classSelect').addEventListener('change', updateTimetable);
-    document.getElementById('viewSelect').addEventListener('change', updateTimetable);
-</script>
+            // Form Submission
+            const admissionForm = document.getElementById('admissionForm');
+            if (admissionForm) {
+                admissionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Form validation
+                    const fullName = document.getElementById('fullName').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const program = document.getElementById('program').value;
+                    
+                    if (!fullName || !email || !phone || !program) {
+                        alert('Please fill all required fields');
+                        return;
+                    }
+                    
+                    // Success message
+                    admissionForm.innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;"></i>
+                            <h3 style="margin-bottom: 1rem; color: #1e3a8a;">Application Submitted!</h3>
+                            <p style="margin-bottom: 2rem;">Thank you for your interest in Russian Business School. Our admissions team will contact you shortly.</p>
+                            <button type="button" class="button" onclick="location.reload()">Submit Another Application</button>
+                        </div>
+                    `;
+                });
+            }
+
+            // Timetable functions
+            
+            // Timetable data
+            const timetableData = {
+                "CF6": {
+                    "Monday": [
+                        { date: "17-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "PFF", faculty: "SR", lecHall: "303" },
+                        { date: "17-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IEPR", faculty: "SBC", lecHall: "303" },
+                        { date: "17-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "FML", faculty: "GM", lecHall: "303" },
+                        { date: "17-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "IB", faculty: "VYJ", lecHall: "303" }
+                    ],
+                    "Tuesday": [
+                        { date: "18-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "FML", faculty: "GM", lecHall: "303" },
+                        { date: "18-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "FML", faculty: "GM", lecHall: "303" },
+                        { date: "18-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "PFF", faculty: "SR", lecHall: "303" },
+                        { date: "18-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "IEPR", faculty: "SBC", lecHall: "303" }
+                    ],
+                    "Wednesday": [
+                        { date: "19-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IT", faculty: "SS", lecHall: "303" },
+                        { date: "19-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IT", faculty: "SS", lecHall: "303" },
+                        { date: "19-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "Club.Act", faculty: "--", lecHall: "--" },
+                        { date: "19-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "Club.Act", faculty: "--", lecHall: "--" }
+                    ],
+                    "Thursday": [
+                        { date: "20-Feb-25", sem: "IV", section: "CF6", session: "8:45 - 10:15", course: "IEPR", faculty: "SBC", lecHall: "303" },
+                        { date: "20-Feb-25", sem: "IV", section: "CF6", session: "10:45 - 12:15", course: "IB", faculty: "SR", lecHall: "303" },
+                        { date: "20-Feb-25", sem: "IV", section: "CF6", session: "1:15 - 2:45", course: "PFF", faculty: "SR", lecHall: "303" },
+                        { date: "20-Feb-25", sem: "IV", section: "CF6", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                    ]
+                },
+                "CM2": {
+                    "Monday": [
+                        { date: "17-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "STM", faculty: "KKS", lecHall: "610" },
+                        { date: "17-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "IEPR", faculty: "DJS", lecHall: "610" },
+                        { date: "17-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "PM", faculty: "Anup", lecHall: "610" },
+                        { date: "17-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "M3", faculty: "UC", lecHall: "306" }
+                    ],
+                    "Tuesday": [
+                        { date: "18-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "M3", faculty: "RS", lecHall: "206" },
+                        { date: "18-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "LM", faculty: "SG", lecHall: "610" },
+                        { date: "18-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "B2B", faculty: "UC", lecHall: "610" },
+                        { date: "18-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "MT/PCL", faculty: "--", lecHall: "--" }
+                    ],
+                    "Wednesday": [
+                        { date: "19-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "LM", faculty: "SUS", lecHall: "610" },
+                        { date: "19-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "B2B", faculty: "UC", lecHall: "610" },
+                        { date: "19-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "IEPR", faculty: "DJS", lecHall: "610" },
+                        { date: "19-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "PM", faculty: "Anup", lecHall: "610" }
+                    ],
+                    "Thursday": [
+                        { date: "20-Feb-25", sem: "IV", section: "CM2", session: "8:45 - 10:15", course: "LM", faculty: "SUS", lecHall: "610" },
+                        { date: "20-Feb-25", sem: "IV", section: "CM2", session: "10:45 - 12:15", course: "CWC", faculty: "SG", lecHall: "610" },
+                        { date: "20-Feb-25", sem: "IV", section: "CM2", session: "1:15 - 2:45", course: "Club.Act", faculty: "--", lecHall: "--" },
+                        { date: "20-Feb-25", sem: "IV", section: "CM2", session: "2:55 - 4:25", course: "Club.Act", faculty: "--", lecHall: "--" }
+                    ]
+                }
+            };
+
+            // Exam timetable data
+            const examTimetableData = {
+                "CF6": [
+                    { day: "Friday", date: "28-02-2025", subject: "IEPR" },
+                    { day: "Monday", date: "03-03-2025", subject: "IT" },
+                    { day: "Tuesday", date: "04-03-2025", subject: "IB" },
+                    { day: "Wednesday", date: "05-03-2025", subject: "FML [ Batch 1 (9:30 to 11:30), Batch 2(1:30 to 3:30)]" },
+                    { day: "Thursday", date: "06-03-2025", subject: "FT" },
+                    { day: "Friday", date: "07-03-2025", subject: "FML [ Batch 3 (9:30 to 11:30), Batch 4(1:30 to 3:30)]" }
+                ],
+                "CM2": [
+                    { day: "Friday", date: "28-02-2025", subject: "IEPR" },
+                    { day: "Monday", date: "03-03-2025", subject: "SM" },
+                    { day: "Tuesday", date: "04-03-2025", subject: "B2B" },
+                    { day: "Wednesday", date: "05-03-2025", subject: "LM" },
+                    { day: "Thursday", date: "06-03-2025", subject: "PM" }
+                ]
+            };
+
+            function createDayTable(dayData, day) {
+                return `
+                    <div class="day-header">${day}</div>
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Session</th>
+                                <th>Course</th>
+                                <th>Faculty</th>
+                                <th>Lec. Hall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${dayData.map(session => `
+                                <tr>
+                                    <td>${session.session}</td>
+                                    <td>${session.course}</td>
+                                    <td>${session.faculty}</td>
+                                    <td>${session.lecHall}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            function createExamTable(examData, classSection) {
+                return `
+                    <div class="exam-timetable">
+                        <div class="day-header">${classSection} - Mid Term Examination Timetable</div>
+                        <table class="timetable">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Date</th>
+                                    <th>Subject</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${examData.map(exam => `
+                                    <tr>
+                                        <td>${exam.day}</td>
+                                        <td>${exam.date}</td>
+                                        <td>${exam.subject}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            function updateTimetable() {
+                const selectedClass = document.getElementById('classSelect').value;
+                const selectedView = document.getElementById('viewSelect').value;
+                const container = document.getElementById('timetableContainer');
+                const content = document.getElementById('timetableContent');
+
+                if (!selectedClass) {
+                    container.classList.remove('visible');
+                    return;
+                }
+
+                if (selectedView === 'exam') {
+                    content.innerHTML = createExamTable(examTimetableData[selectedClass], selectedClass);
+                } else {
+                    let allTablesHTML = '';
+                    for (const [day, dayData] of Object.entries(timetableData[selectedClass])) {
+                        allTablesHTML += createDayTable(dayData, day);
+                    }
+                    content.innerHTML = allTablesHTML;
+                }
+                
+                // Show with animation
+                setTimeout(() => {
+                    container.classList.add('visible');
+                }, 100);
+            }
+
+            // Event listeners for timetable
+            const classSelect = document.getElementById('classSelect');
+            const viewSelect = document.getElementById('viewSelect');
+            
+            if (classSelect && viewSelect) {
+                classSelect.addEventListener('change', updateTimetable);
+                viewSelect.addEventListener('change', updateTimetable);
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Remove preloader
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }
+            }, 500);
+        });
+    </script>
 </body>
 </html>
-
